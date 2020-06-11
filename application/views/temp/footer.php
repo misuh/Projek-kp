@@ -36,6 +36,14 @@
       </div>
     </div>
   </div>
+  <a href="#head"><img src="upbutton.png" id="fixedbutton"></a>
+<style>
+    #fixedbutton {
+    position: fixed;
+    bottom: 5px;
+    right: 5px; 
+    }
+</style>
 
   <!-- Bootstrap core JavaScript-->
   <script src="<?= base_url('aset/'); ?>vendor/jquery/jquery.min.js"></script>

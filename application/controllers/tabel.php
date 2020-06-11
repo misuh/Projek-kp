@@ -10,7 +10,7 @@ class Tabel extends CI_Controller
     	$this->load->view('temp/header',$data);
     	$this->load->view('temp/side',$data);
     	$this->load->view('temp/top',$data);
-        $this->load->view('tet/test',$data);
+        $this->load->view('Menu/tabel',$data);
         $this->load->view('temp/footer',$data);
     }
 }
