@@ -51,13 +51,14 @@
         <td class="text-center"><?= $k['asman']; ?></td>
         <td class="text-center"><?= $k['peru']; ?></td>
         <td class="text-center"><?= $k['jml']; ?></td>
-        <td class="text-center"><?= $k['dur']; ?></td>
+        <td class="text-center"><?= $k['dur']; ?> Jam</td>
         <td class="text-center"><?= $k['stan']; ?>%</td>
         <td class="text-center"><?= $k['rele']; ?>%</td>
-        <td><div class="btn btn-success btn-sm" data-toggle="tooltip" title="Edit Data"><i class="fas fa-pencil-alt"></i></div></td>
-         <td><div class="btn btn-danger btn-sm" data-toggle="tooltip" title="Hapus Data"><i class="fas fa-trash-alt"></i></div></td>
+          <td><?= anchor('tabel/edit/'.$k['id_data'],'<div class="btn btn-success btn-sm" data-toggle="tooltip" title="Edit Data"><i class="fas fa-pencil-alt"');?>></i></div></td>
+         <td><?= base_url('tabel/hapus/'.$k['id_data'],'<div class="btn btn-danger btn-sm" data-toggle="tooltip" title="Hapus Data"><i class="fas fa-trash-alt"></i></div>'); ?></td>
       <?php $i++ ?>
       <?php endforeach; ?>
+       
       </tr>
    
   </tbody>

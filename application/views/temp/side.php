@@ -3,7 +3,7 @@
       <!-- Sidebar - Brand -->
       <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?= base_url('home'); ?>">
         <div class="sidebar-brand-icon">
-           <i><img src="aset/log.png"></i>
+           <i><img src="aset/img/log.png"></i>
         </div>
         <div class="sidebar-brand-text mx-3">Aplikasi Kinerja</div>
       </a>
@@ -26,14 +26,20 @@
         Interface
       </div>
 
-
       <!-- Nav Item - Tables -->
       <li class="nav-item">
         <a class="nav-link" href="<?= base_url('tabel'); ?>">
           <i class="fas fa-fw fa-table"></i>
           <span>Tables</span></a>
       </li>
+        <hr class="sidebar-divider">
 
+      <!-- Nav Item - Tables -->
+      <li class="nav-item">
+        <a class="nav-link" href="<?= base_url('auth/logout'); ?>" data-toggle="modal" data-target="#logoutModal">
+          <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400 icon-flipped"></i>
+          <span>logout</span></a>
+      </li>
       <!-- Divider -->
       <hr class="sidebar-divider d-none d-md-block">
 

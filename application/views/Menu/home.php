@@ -1,6 +1,8 @@
 <div class="container">
 	<div class="row">
-
+        <?= validation_errors();  ?>
+          <?= form_error('home','<div class="alert alert-danger" role="alert">','</div>'); ?>
+           <?= $this->session->flashdata('message'); ?>
             <!-- Earnings (Monthly) Card Example -->
             <div class="col mb-4">
               <div class="card border-left-primary shadow h-100 py-2">
