@@ -3,7 +3,7 @@
       <!-- Sidebar - Brand -->
       <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?= base_url('home'); ?>">
         <div class="sidebar-brand-icon">
-           <i><img src="aset/img/log.png"></i>
+           <i><img src="<?= base_url('aset/img/log.png') ?>"></i>
         </div>
         <div class="sidebar-brand-text mx-3">Aplikasi Kinerja</div>
       </a>
