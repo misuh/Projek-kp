@@ -1,3 +1,30 @@
+<style>
+  *{padding:0;margin:0;}
+
+body{
+  font-family:Verdana, Geneva, sans-serif;
+  font-size:18px;
+  background-color:#CCC;
+}
+
+.guard{
+  position:fixed;
+  width:60px;
+  height:60px;
+  bottom:40px;
+  right:40px;
+  background-color:#FFF;
+  color:#FFF;
+  border-radius:50px;
+  text-align:center;
+  box-shadow: 2px 2px 3px #999;
+}
+
+.my-guard{
+  margin-top:15px;
+}
+</style>
+
 <div class="container-fluid">
 <div class="row mb-3">
   <div class="dropdown show ">
@@ -19,8 +46,8 @@
 </div>
 </div>
 
-<div class="row ">
-  <table class="table table-bordered col-sm table-dark col-12 col-sm-12 ">
+<div class="row">
+  <table id="dtBasicExample" class="table table-bordered col-sm table-dark col-12 col-sm-12 ">
   <thead>
     <tr class="text-center">
       <th scope="col" class="align-middle">No</th>
@@ -63,14 +90,26 @@
    
   </tbody>
 </table>
-<button type="button" class="btn btn-primary col-md-2  offset-md-10" data-toggle="modal" data-target="#TambahData">
-              <i class="fa fa-plus"></i> 
-                    Tambah Data
-        </button>
-  
+
+ 
 </div>
 </div>
-</div>
+
+  <nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center">
+      <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+      <li class="page-item"><a class="page-link" href="#">1</a></li>
+      <li class="page-item"><a class="page-link" href="#">2</a></li>
+      <li class="page-item"><a class="page-link" href="#">3</a></li>
+      <li class="page-item"><a class="page-link" href="#">Next</a></li>
+    </ul>
+  </nav>
+
+<a  class="btn guard" data-toggle="modal" data-target="#TambahData">
+ <i class="fa fa-plus my-guard"></i>
+ </a>
+
+
 
 
 <!-- Modal -->
@@ -78,7 +117,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Tambah Data</h5>
+        <h5 class="modal-title mb-3" id="exampleModalLabel" >Tambah Data</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -140,3 +179,5 @@
     </div>
   </div>
 </div>
+
+

@@ -9,6 +9,10 @@ class Tabel extends CI_Controller
         $data['user'] = $this->db->get_where('usr',['email' => 
         $this->session->userdata('email')]) -> row_array();
     	$data['isitabel'] = $this->db->get('perfonmasi_jaringan')->result_array();
+
+        $limit = isset($_POST["limit-records"]) ? $_POST["limit-records"] : 100
+
+
 		$data['title'] = 'Tabel';
     	$this->load->view('temp/header',$data);
     	$this->load->view('temp/side',$data);
