@@ -69,7 +69,7 @@ body{
       <?php $i=1;  ?>
       <?php foreach ($isitabel as $k) :?>
       <tr>
-        <th scope="row"><?= $i; ?></th>
+        <th scope="row"><?= ++$start; ?></th>
         <td><?= $k['u_pln']; ?></td>
         <td><?= $k['link']; ?></td>
         <td class="text-center"><?= $k['product']; ?></td>
@@ -94,7 +94,8 @@ body{
  
 </div>
 </div>
-
+  <?= $this->pagination->create_links(); ?>
+<!-- 
   <nav aria-label="Page navigation example">
     <ul class="pagination justify-content-center">
       <li class="page-item"><a class="page-link" href="#">Previous</a></li>
@@ -103,7 +104,7 @@ body{
       <li class="page-item"><a class="page-link" href="#">3</a></li>
       <li class="page-item"><a class="page-link" href="#">Next</a></li>
     </ul>
-  </nav>
+  </nav> -->
 
 <a  class="btn guard" data-toggle="modal" data-target="#TambahData">
  <i class="fa fa-plus my-guard"></i>

@@ -30,7 +30,13 @@
       <li class="nav-item">
         <a class="nav-link" href="<?= base_url('tabel'); ?>">
           <i class="fas fa-fw fa-table"></i>
-          <span>Tables</span></a>
+          <span>Tabel Data</span></a>
+      </li>
+      
+        <li class="nav-item">
+        <a class="nav-link" href="<?= base_url('tabel'); ?>">
+          <i class="fas fa-fw fa-table"></i>
+          <span>Menambahkan Data</span></a>
       </li>
         <hr class="sidebar-divider">
 
