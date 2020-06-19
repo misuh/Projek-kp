@@ -26,28 +26,47 @@ body{
 </style>
 
 <div class="container-fluid">
-<div class="row mb-3">
-  <div class="dropdown show ">
-  <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    Bulan
-  </a>
-
-  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-    <a class="dropdown-item" href="#">Action</a>
+  <div class="mb-2">
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse dropdown show" id="navbarTogglerDemo01">
+    <div class="dropdown">
+      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Bulan
+      </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+      <a class="dropdown-item" href="#">Action</a>
+      <a class="dropdown-item" href="#">Another action</a>
+      <a class="dropdown-item" href="#">Something else here</a>
+    </div>
+    </div>
+     <div class="dropdown ml-3">
+      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Tahun
+      </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+      <a class="dropdown-item" href="#">Action</a>
+      <a class="dropdown-item" href="#">Another action</a>
+      <a class="dropdown-item" href="#">Something else here</a>
+    </div>
+    </div>
+      <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+      </ul>
+      <form class="form-inline my-2 my-lg-0" action="<?=  base_url('tabel'); ?>" method="post" >
+        <input class="form-control mr-sm-2" type="text" placeholder="Cari Data" name="keyword" autocomplete="off">
+        <div class="input-group-append">
+          <input class="btn btn-outline-success my-2 my-sm-0" type="submit" name="submit">
+        </div>
+      </form>
   </div>
-</div>
-<div class="dropdown show ml-3">
-  <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    Tahun
-  </a>
-  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-    <a class="dropdown-item" href="#">Action</a>
-  </div>
-</div>
+</nav>
 </div>
 
-<div class="row">
-  <table id="dtBasicExample" class="table table-bordered col-sm table-dark col-12 col-sm-12 ">
+
+
+  <table id="dtBasicExample" class="table table-bordered col-sm table-dark col-12 col-sm-12 mb-3 ml-3 ">
   <thead>
     <tr class="text-center">
       <th scope="col" class="align-middle">No</th>
@@ -84,34 +103,19 @@ body{
           <td><?= anchor('tabel/edit/'.$k['id_data'], '<div class="btn btn-success btn-sm" data-toggle="tooltip" title="Edit Data"><i class="fas fa-pencil-alt" ></i></div>');?></td>
          <td><?= anchor('tabel/hapus/'.$k['id_data'],'<div class="btn btn-danger btn-sm" data-toggle="tooltip" title="Hapus Data"><i class="fas fa-trash-alt"></i></div>');?></td>
       <?php $i++ ?>
-      <?php endforeach; ?>
-       
+      <?php endforeach; ?>    
       </tr>
-   
   </tbody>
 </table>
 
- 
-</div>
+<!-- Pagination -->
 </div>
   <?= $this->pagination->create_links(); ?>
-<!-- 
-  <nav aria-label="Page navigation example">
-    <ul class="pagination justify-content-center">
-      <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-      <li class="page-item"><a class="page-link" href="#">1</a></li>
-      <li class="page-item"><a class="page-link" href="#">2</a></li>
-      <li class="page-item"><a class="page-link" href="#">3</a></li>
-      <li class="page-item"><a class="page-link" href="#">Next</a></li>
-    </ul>
-  </nav> -->
+
 
 <a  class="btn guard" data-toggle="modal" data-target="#TambahData">
  <i class="fa fa-plus my-guard"></i>
  </a>
-
-
-
 
 <!-- Modal -->
 <div class="modal fade" id="TambahData" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
