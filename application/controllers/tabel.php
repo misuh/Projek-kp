@@ -9,27 +9,38 @@ class Tabel extends CI_Controller
         $data['user'] = $this->db->get_where('usr',['email' => 
         $this->session->userdata('email')]) -> row_array();
 
+        // Penamaan Model Tabel model menjadi tm
+        $this->load->model('tabel_model','tm');
+        $data['keyword'] = null;
+        // Pencarian
         if($this->input->post('submit')){
             $data['keyword'] = $this->input->post('keyword');
-            // $this->session->
+            $this->session->set_userdata('keyword',$data['keyword']);
+        }else{
+            $data['keyword'] = $this->session->userdata('keyword');
         }
-
-        $data['keyword'] = null;
-        if ($data['keyword']) {
-            $this->db->like('product',$data['keyword']);
-        }
-
-
-        $config['total_rows']       = $this->db->get(['perfonmasi_jaringan'])-> num_rows();
+        $this->db->like('u_pln',$data['keyword']);
+        $this->db->or_like('link',$data['keyword']);
+        $this->db->or_like('product',$data['keyword']);
+        $this->db->or_like('bandwith',$data['keyword']);
+        $this->db->or_like('service_id',$data['keyword']);
+        $this->db->or_like('asman',$data['keyword']);
+        $this->db->or_like('peru',$data['keyword']);
+        $this->db->or_like('jml',$data['keyword']);
+        $this->db->or_like('dur',$data['keyword']);
+        $this->db->or_like('stan',$data['keyword']);
+        $this->db->or_like('rele',$data['keyword']);
+        $this->db->from('perfonmasi_jaringan');
+        $config['total_rows']       = $this->db->count_all_results();
         $config['per_page']         = 10;
-
-        $this->pagination->initialize($config); 
-
+        $data['total_rows']         = $config['total_rows'];
 
         
-        $data['start'] = $this->uri->segment(3);
-        $data['isitabel'] = $this->db->get('perfonmasi_jaringan',$config['per_page'],$data['start'])->result_array();
 
+        $data['start'] = $this->uri->segment(3); 
+        $data['isitabel'] = $this->tm->gettabel($config['per_page'],$data['start'],$data['keyword']);
+
+        $this->pagination->initialize($config); 
 
 		$data['title'] = 'Tabel';
     	$this->load->view('temp/header',$data);

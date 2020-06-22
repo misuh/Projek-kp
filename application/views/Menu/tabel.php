@@ -31,6 +31,7 @@ body{
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
+
   <div class="collapse navbar-collapse dropdown show" id="navbarTogglerDemo01">
     <div class="dropdown">
       <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -61,12 +62,25 @@ body{
         </div>
       </form>
   </div>
+
 </nav>
+  <div class="ml-3">
+    <h5>Result <?= $total_rows  ?></h5>
+  </div>
 </div>
 
 
 
   <table id="dtBasicExample" class="table table-bordered col-sm table-dark col-12 col-sm-12 mb-3 ml-3 ">
+    <?php if(empty($isitabel)) :?>
+        <tr>
+          <td colspan="13">
+            <div class="alert alert-danger" role="alert">
+              Data Tidak ada
+            </div>
+          </td>
+        </tr>
+      <?php endif; ?>
   <thead>
     <tr class="text-center">
       <th scope="col" class="align-middle">No</th>
@@ -85,7 +99,7 @@ body{
     </tr>
   </thead>
   <tbody>
-      <?php $i=1;  ?>
+      
       <?php foreach ($isitabel as $k) :?>
       <tr>
         <th scope="row"><?= ++$start; ?></th>
@@ -102,7 +116,6 @@ body{
         <td class="text-center"><?= $k['rele']; ?>%</td>
           <td><?= anchor('tabel/edit/'.$k['id_data'], '<div class="btn btn-success btn-sm" data-toggle="tooltip" title="Edit Data"><i class="fas fa-pencil-alt" ></i></div>');?></td>
          <td><?= anchor('tabel/hapus/'.$k['id_data'],'<div class="btn btn-danger btn-sm" data-toggle="tooltip" title="Hapus Data"><i class="fas fa-trash-alt"></i></div>');?></td>
-      <?php $i++ ?>
       <?php endforeach; ?>    
       </tr>
   </tbody>
