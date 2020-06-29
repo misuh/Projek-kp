@@ -50,6 +50,12 @@
 				<label>Realisasi Availability</label>
 				<input type="text" name="rele" class="form-control" value="<?=  $k->rele;?>">
 			</div>
+			<div class="form-group">
+				<div class="form-group ml-3">
+           			<label>Bulan / Tahun</label>
+              				<?= form_dropdown('dates') ?>
+          		</div>
+			</div>
 			<button type="submit" class="btn btn-primary btn-sm"> Simpan </button>
 		</form>
 	<?php endforeach; ?>

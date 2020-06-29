@@ -8,7 +8,7 @@ class Tabel extends CI_Controller
     {
         $data['user'] = $this->db->get_where('usr',['email' => 
         $this->session->userdata('email')]) -> row_array();
-
+        $data['tanggal'] = $this->tanggal_model->tampilalldata();
         // Penamaan Model Tabel model menjadi tm
         $this->load->model('tabel_model','tm');
         $data['keyword'] = null;
@@ -35,7 +35,6 @@ class Tabel extends CI_Controller
         $config['per_page']         = 10;
         $data['total_rows']         = $config['total_rows'];
 
-        
 
         $data['start'] = $this->uri->segment(3); 
         $data['isitabel'] = $this->tm->gettabel($config['per_page'],$data['start'],$data['keyword']);
@@ -52,6 +51,8 @@ class Tabel extends CI_Controller
 
     public function tambahdata(){
 
+   
+        $data['tanggal'] = $this->tanggal_model->tampilalldata();
     	$u_pln = $this->input->post('u_pln');
     	$link = $this->input->post('link');
     	$product = $this->input->post('product');
@@ -63,6 +64,8 @@ class Tabel extends CI_Controller
     	$dur = $this->input->post('dur');
     	$stan = $this->input->post('stan');
     	$rele = $this->input->post('rele');
+        $id_tanggal = $this->input->post('id_tanggal');
+     
 
     	$data = array(
     		'u_pln' => $u_pln,
@@ -76,7 +79,7 @@ class Tabel extends CI_Controller
     		'dur' => $dur,
     		'stan' => $stan,
     		'rele' => $rele,
-    		'tanggal' => time()
+    		'id_tanggal' => $id_tanggal
     	);
     	$this->db->set($data);
     	$this->db->insert('perfonmasi_jaringan');
@@ -86,6 +89,11 @@ class Tabel extends CI_Controller
     {
         $where = array('id_data' =>$id);
         $data['data'] = $this->db->get_where('perfonmasi_jaringan',$where)->result();
+        $tanggal_query = $this->tanggal_model->tampilalldata();
+        $tanggal[null] = '-- Pilih Data --';
+        foreach ($tanggal_query as $k) {
+            $tanggal[$k->$tanggal_id] = $k->dates;
+        }
         $data['title'] = 'Edit Data';
         $data['user'] = $this->db->get_where('usr',['email' => 
         $this->session->userdata('email')]) -> row_array();
@@ -109,6 +117,8 @@ class Tabel extends CI_Controller
             $dur        = $this->input->post('dur');
             $stan       = $this->input->post('stan');
             $rele       = $this->input->post('rele');
+            $id_tanggal = $this->input->post('id_tanggal');
+
             $data = array(
                 'u_pln' => $u_pln,
                 'link' => $link,
@@ -120,7 +130,8 @@ class Tabel extends CI_Controller
                 'jml' => $jml,
                 'dur' => $dur,
                 'stan' => $stan,
-                'rele' => $rele
+                'rele' => $rele,
+                'id_tanggal' => $id_tanggal
             );
             $where = array('id_data' => $id_data);
             $this->db->where($where);

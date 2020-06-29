@@ -35,20 +35,10 @@ body{
   <div class="collapse navbar-collapse dropdown show" id="navbarTogglerDemo01">
     <div class="dropdown">
       <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        Bulan
+        Bulan / Tahun
       </button>
     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-      <a class="dropdown-item" href="#">Action</a>
-      <a class="dropdown-item" href="#">Another action</a>
-      <a class="dropdown-item" href="#">Something else here</a>
-    </div>
-    </div>
-     <div class="dropdown ml-3">
-      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        Tahun
-      </button>
-    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-      <a class="dropdown-item" href="#">Action</a>
+      <a class="dropdown-item" href="#">Januari</a>
       <a class="dropdown-item" href="#">Another action</a>
       <a class="dropdown-item" href="#">Something else here</a>
     </div>
@@ -112,8 +102,8 @@ body{
         <td class="text-center"><?= $k['peru']; ?></td>
         <td class="text-center"><?= $k['jml']; ?></td>
         <td class="text-center"><?= $k['dur']; ?> Jam</td>
-        <td class="text-center"><?= $k['stan']; ?>%</td>
-        <td class="text-center"><?= $k['rele']; ?>%</td>
+        <td class="text-center"><?= $k['stan']; ?> %</td>
+        <td class="text-center"><?= $k['rele']; ?> %</td>
           <td><?= anchor('tabel/edit/'.$k['id_data'], '<div class="btn btn-success btn-sm" data-toggle="tooltip" title="Edit Data"><i class="fas fa-pencil-alt" ></i></div>');?></td>
          <td><?= anchor('tabel/hapus/'.$k['id_data'],'<div class="btn btn-danger btn-sm" data-toggle="tooltip" title="Hapus Data"><i class="fas fa-trash-alt"></i></div>');?></td>
       <?php endforeach; ?>    
@@ -170,21 +160,36 @@ body{
             <label>PERUNTUKAN</label>
             <input type="text" name="peru" class="form-control">
           </div>
-          <div class="form-group">
+          <div class="row text-center">
+          <div class="form-group  col-lg-6">
             <label>JUMLAH GANGGUAN</label>
-            <input type="text" name="jml" class="form-control">
+            <input type="text" name="jml" class="form-control ">
           </div>
-          <div class="form-group">
+          <div class="form-group col-lg-6">
             <label>DURASI GANGGUAN</label>
             <input type="text" name="dur" class="form-control">
           </div>
-          <div class="form-group">
+          </div>
+          <div class="row text-center">
+          <div class="form-group col-lg-6">
             <label>STANDARD AVAILABILITY</label>
             <input type="text" name="stan" class="form-control">
           </div>
-          <div class="form-group">
+          <div class="form-group col-lg-6">
             <label>REALISASI AVAILABILITY</label>
             <input type="text" name="rele" class="form-control">
+          </div>
+          </div>
+          <div class = 'row'>
+          <div class="form-group ml-3">
+           <label>Bulan</label>
+            <select name="id_tanggal" class="form-control">
+              <option value=""> Bulan / Tahun  </option>
+              <?php foreach ($tanggal as $key => $data): ?>
+                <option value="<?= $data['id_tanggal']  ?>"><?= $data['dates'];  ?></option>
+              <?php endforeach ?>
+            </select>
+          </div>
           </div>
           
        
@@ -197,5 +202,13 @@ body{
     </div>
   </div>
 </div>
+
+<script>
+  $("#datepicker").datepicker( {
+    format: "mm-yyyy",
+    startView: "months", 
+    minViewMode: "months"
+});
+</script>
 
 
