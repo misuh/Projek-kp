@@ -32,7 +32,13 @@
 		return $this->db->get('perfonmasi_jaringan')->num_rows();
 	}
 
+	public function getfilter($limit,$start,$filter_tabel = null){
 
+		if ($filter_tabel) {
+           $this->db->like('id_tanggal',$filter_tabel);
+        }
+		return $this->db->get('perfonmasi_jaringan',$limit,$start)->result_array();
+	}
 	// public function cari($tabel,$data,$keyword){
 
 	// 	if ($keyword) {

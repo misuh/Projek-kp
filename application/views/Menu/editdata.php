@@ -50,12 +50,11 @@
 				<label>Realisasi Availability</label>
 				<input type="text" name="rele" class="form-control" value="<?=  $k->rele;?>">
 			</div>
-			<div class="form-group">
-				<div class="form-group ml-3">
-           			<label>Bulan / Tahun</label>
-              				<?= form_dropdown('dates') ?>
-          		</div>
-			</div>
+			<select name="id_tanggal" class="form-control">
+				<?php foreach ($tanggal as $tgl) { ?>
+					<option <?php if($tgl->id_tanggal == "$k->id_tanggal"){ echo 'selected="selected"'; } ?> value="<?php echo $tgl->id_tanggal ?>"><?php echo $tgl->dates?> </option>
+				<?php } ?>
+			</select>
 			<button type="submit" class="btn btn-primary btn-sm"> Simpan </button>
 		</form>
 	<?php endforeach; ?>

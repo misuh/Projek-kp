@@ -9,9 +9,11 @@ class Tabel extends CI_Controller
         $data['user'] = $this->db->get_where('usr',['email' => 
         $this->session->userdata('email')]) -> row_array();
         $data['tanggal'] = $this->tanggal_model->tampilalldata();
+        $data['tanggals'] = $this->db->get('tanggal')->result();
         // Penamaan Model Tabel model menjadi tm
         $this->load->model('tabel_model','tm');
         $data['keyword'] = null;
+        $data['filter_tabel'] = null;
         // Pencarian
         if($this->input->post('submit')){
             $data['keyword'] = $this->input->post('keyword');
@@ -19,6 +21,15 @@ class Tabel extends CI_Controller
         }else{
             $data['keyword'] = $this->session->userdata('keyword');
         }
+
+        if($this->input->post('filter')){
+            $data['filter_tabel'] = $this->input->post('filter_tabel');
+            $this->session->set_userdata('filter_tabel',$data['filter_tabel']);
+        }else{
+            $data['filter_tabel'] = $this->session->userdata('filter_tabel');
+        }
+
+       
         $this->db->like('u_pln',$data['keyword']);
         $this->db->or_like('link',$data['keyword']);
         $this->db->or_like('product',$data['keyword']);
@@ -30,14 +41,28 @@ class Tabel extends CI_Controller
         $this->db->or_like('dur',$data['keyword']);
         $this->db->or_like('stan',$data['keyword']);
         $this->db->or_like('rele',$data['keyword']);
+        $this->db->or_like('id_tanggal',$data['filter_tabel']);
         $this->db->from('perfonmasi_jaringan');
+
         $config['total_rows']       = $this->db->count_all_results();
         $config['per_page']         = 10;
         $data['total_rows']         = $config['total_rows'];
 
-
-        $data['start'] = $this->uri->segment(3); 
-        $data['isitabel'] = $this->tm->gettabel($config['per_page'],$data['start'],$data['keyword']);
+        $data['start'] = $this->uri->segment(3);
+        if ($data['keyword'] == null && $data['filter_tabel'] == null ) {
+                $data['isitabel'] = $this->tm->gettabel($config['per_page'],$data['start']);} 
+        elseif ($data['keyword'] != null) {
+           {    
+            $data['isitabel'] = $this->tm->gettabel($config['per_page'],$data['start'],$data['keyword']);}
+                if($data['filter_tabel'] != null){
+                    $data['isitabel'] = $this->tm->getfilter($config['per_page'],$data['start'],$data['filter_tabel']);
+            }
+        }else{
+            $data['isitabel'] = $this->tm->getfilter($config['per_page'],$data['start'],$data['filter_tabel']);
+            if ($data['keyword'] != null){
+                $data['isitabel'] = $this->tm->gettabel($config['per_page'],$data['start'],$data['keyword']);}
+            }
+        
 
         $this->pagination->initialize($config); 
 
@@ -89,11 +114,7 @@ class Tabel extends CI_Controller
     {
         $where = array('id_data' =>$id);
         $data['data'] = $this->db->get_where('perfonmasi_jaringan',$where)->result();
-        $tanggal_query = $this->tanggal_model->tampilalldata();
-        $tanggal[null] = '-- Pilih Data --';
-        foreach ($tanggal_query as $k) {
-            $tanggal[$k->$tanggal_id] = $k->dates;
-        }
+        $data['tanggal'] = $this->db->get('tanggal')->result();
         $data['title'] = 'Edit Data';
         $data['user'] = $this->db->get_where('usr',['email' => 
         $this->session->userdata('email')]) -> row_array();

@@ -10,7 +10,7 @@ class tanggal_model extends CI_Model
 		$this->db->select('*');
 		$this->db->from('tanggal');
 		$this->db->join('perfonmasi_jaringan', 'tanggal.id_tanggal = perfonmasi_jaringan.id_tanggal');
-		$query = $this->db->get()->result();
+		$query = $this->db->get()->result_array();
 		// foreach ($query as $row) {
 		// 	echo $row->u_pln;
 		// 	}

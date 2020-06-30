@@ -28,23 +28,27 @@ body{
 <div class="container-fluid">
   <div class="mb-2">
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" >
     <span class="navbar-toggler-icon"></span>
   </button>
 
-  <div class="collapse navbar-collapse dropdown show" id="navbarTogglerDemo01">
-    <div class="dropdown">
-      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        Bulan / Tahun
-      </button>
-    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-      <a class="dropdown-item" href="#">Januari</a>
-      <a class="dropdown-item" href="#">Another action</a>
-      <a class="dropdown-item" href="#">Something else here</a>
-    </div>
-    </div>
+  <div class="collapse navbar-collapse ">
+    
+      
       <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+        <form action="<?=  base_url('tabel'); ?>" method="post">
+        <select name="filter_tabel" class="form-control" >
+              <option value=""> Bulan / Tahun  </option>
+              <?php foreach ($tanggal as $key => $data): ?>
+                <option value="<?= $data['id_tanggal']  ?>"><?= $data['dates'];  ?></option>
+              <?php endforeach ?>
+            </select>
       </ul>
+      <div class="col-md-9 mr-5">
+       <input class="btn btn-outline-success" type="submit" name="filter">
+       </div>
+       </form>
+
       <form class="form-inline my-2 my-lg-0" action="<?=  base_url('tabel'); ?>" method="post" >
         <input class="form-control mr-sm-2" type="text" placeholder="Cari Data" name="keyword" autocomplete="off">
         <div class="input-group-append">
