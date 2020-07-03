@@ -1,50 +1,38 @@
    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
       <!-- Sidebar - Brand -->
-      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?= base_url('home'); ?>">
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?= base_url('adm_home'); ?>">
         <div class="sidebar-brand-icon">
            <i><img src="<?= base_url('aset/img/log.png') ?>"></i>
         </div>
         <div class="sidebar-brand-text mx-3">Aplikasi Kinerja</div>
       </a>
 
+
+      <div class="sidebar-heading">
+        Admin Menu
+      </div>
+      <hr class="sidebar-divider my-0">
+
+      <!-- Nav Item - Dashboard -->
+      <li class="nav-item">
+        <a class="nav-link" href="<?= base_url('adm_home'); ?>">
+         <i class="fas fa-home"></i>
+          <span>Admin Menu</span></a>
+      </li>
+
+      <div class="sidebar-heading">
+        User Menu
+      </div>
       <!-- Divider -->
       <hr class="sidebar-divider my-0">
 
       <!-- Nav Item - Dashboard -->
       <li class="nav-item">
         <a class="nav-link" href="<?= base_url('home'); ?>">
-         <i class="fas fa-home"></i>
-          <span>Home</span></a>
+         <i class="fas fa-sign-in-alt"></i>
+          <span>Ke halaman User</span></a>
       </li>
-
-      <!-- Divider -->
-      <hr class="sidebar-divider">
-
-      <!-- Heading -->
-      <div class="sidebar-heading">
-        Menu
-      </div>
-
-      <!-- Nav Item - Tables -->
-      <li class="nav-item">
-        <a class="nav-link" href="<?= base_url('tabel'); ?>">
-          <i class="fas fa-fw fa-table"></i>
-          <span>Tabel Data</span></a>
-      </li>
-      
-        <li class="nav-item">
-        <a class="nav-link" href="<?= base_url('tanggal'); ?>">
-          <i class="fas fa-fw fa-table"></i>
-          <span>Atur Tanggal</span></a>
-      </li>
-        <hr class="sidebar-divider">
-        <?php if ($user['roles_id'] ==  1) : ?>
-        <li class="nav-item">
-        <a class="nav-link" href="<?= base_url('adm_home'); ?>">
-          <i class="fas fa-sign-in-alt"></i>
-          <span>Kembali Ke halaman Admin</span></a>
-         <?php endif; ?> 
 
       <!-- Nav Item - Tables -->
       <li class="nav-item">

@@ -26,6 +26,9 @@ body{
 </style>
 
 <div class="container-fluid">
+  <?= validation_errors();  ?>
+  <?= form_error('menu','<div class="alert alert-danger" role="alert">','</div>'); ?>
+  <?= $this->session->flashdata('message');  ?>
   <div class="mb-2">
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" >

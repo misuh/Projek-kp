@@ -1,4 +1,5 @@
 <div class="container">
+  <?= $this->session->flashdata('message');  ?>
 	<div class="row">
         <?= validation_errors();  ?>
           <?= form_error('home','<div class="alert alert-danger" role="alert">','</div>'); ?>

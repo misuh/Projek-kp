@@ -24,6 +24,7 @@ body{
   margin-top:15px;
 }
 </style>
+<?= $this->session->flashdata('message');  ?>
 <div class="container-fluid">
 <table class="table table-dark table-bordered col-lg-6">
   <thead>

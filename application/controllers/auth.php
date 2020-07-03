@@ -34,11 +34,11 @@ class Auth extends CI_Controller
 				if (password_verify($password, $user['password'])) {
 					$data = [
 						'email' => $user['email'], 
-						'roles' => $user['roles']
+						'roles_id' => $user['roles_id']
 					];
 					$this->session->set_userdata($data);
-					if ($user['roles'] == 1) {
-						redirect('adm_home	');
+					if ($user['roles_id'] == 1) {
+						redirect('adm_home');
 					}else{
 						redirect('home');
 					}
@@ -73,7 +73,7 @@ class Auth extends CI_Controller
 					'email' => htmlspecialchars($this->input->post('email','true')),
 					'image'=> 'default.png',
 					'password' => password_hash($this->input->post('password'), PASSWORD_DEFAULT),
-					'roles' => 2,
+					'roles_id' => 2,
 					'ia' => 1,
 					'date_create' => time()
 				];
@@ -87,7 +87,7 @@ class Auth extends CI_Controller
 
 	public function logout(){
 		$this->session->unset_userdata('email');
-		$this->session->unset_userdata('roles');
+		$this->session->unset_userdata('roles_id');
 		$this->session->set_flashdata('message','<div class="alert alert-danger text-center" role="alert"> Berhasil Logout ! </div>');
 		redirect('auth');
 

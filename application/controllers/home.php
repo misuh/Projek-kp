@@ -2,7 +2,13 @@
 defined('BASEPATH') or exit('No direct script access allowed');
 
 class home extends CI_Controller
-{
+{   
+    public function __construct(){
+            parent ::__construct();
+            if($this->session->userdata('roles_id') == null){
+                redirect('auth');
+            }
+        }
 
     public function index(){
     	$data['user'] = $this->db->get_where('usr',['email' => 
@@ -35,5 +41,15 @@ class home extends CI_Controller
         echo json_encode($data);
         // print($cek);
         // exit();
+    }
+
+    public function edit_profile(){
+        $data['user'] = $this->db->get_where('usr',['email' => 
+        $this->session->userdata('email')]) -> row_array();
+        $this->load->view('temp/header',$data);
+        $this->load->view('temp/side',$data);
+        $this->load->view('temp/top',$data);
+        $this->load->view('Menu/edit_profile',$data);
+        $this->load->view('temp/footer',$data);
     }
 }
