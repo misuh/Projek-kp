@@ -38,7 +38,7 @@ class adm_home extends CI_Controller
     	$data['title'] = 'Admin Home';
 		$this->load->view('temp/header',$data);
     	$this->load->view('temp/adm_side',$data);
-    	$this->load->view('temp/top',$data);
+    	$this->load->view('temp/top_admin',$data);
         $this->load->view('Menu/adm_menu',$data);
         $this->load->view('temp/footer',$data);
         }
@@ -53,7 +53,7 @@ class adm_home extends CI_Controller
         $this->session->userdata('email')]) -> row_array();
         $this->load->view('temp/header',$data);
         $this->load->view('temp/adm_side',$data);
-        $this->load->view('temp/top',$data);
+        $this->load->view('temp/top_admin',$data);
         $this->load->view('Menu/editusrdata',$data);
         $this->load->view('temp/footer',$data);
         }
@@ -83,4 +83,30 @@ class adm_home extends CI_Controller
         $this->db->delete('usr');
         redirect('adm_home');
         }
+
+        public function edit_profila($id){
+        $where = array('id' =>$id);
+        $data['data'] = $this->db->get_where('usr',$where)->result();
+        $data['title'] = 'Edit Profile';
+        $this->load->view('temp/header',$data);
+        $this->load->view('temp/adm_side',$data);
+        $this->load->view('temp/top_admin',$data);
+        $this->load->view('Menu/edit_profile',$data);
+        $this->load->view('temp/footer',$data);}
+
+        public function update_profile(){
+         $id    = $this->input->post('id');
+        $name    = $this->input->post('name');
+        $email      = $this->input->post('email');
+    
+        $data = array(
+            'name' => $name,
+            'email' => $email,
+        );
+        $where = array('id' => $id);
+        $this->db->where($where);
+        $this->db->update('usr',$data);
+        redirect('adm_home');
+    }
+    
 }

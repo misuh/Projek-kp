@@ -2,7 +2,7 @@
 	<h3>Edit Data</h3>
 
 	<?php foreach ($data as $k) :?>
-		<form method="post" action="<?= base_url().'tabel/update' ?>">
+		<form method="post" action="<?= base_url().'tabel/update' ?>" class="col-4">
 			<div class="form-group">
 				<input type="hidden" name="id_data" class="form-control" value="<?=  $k->id_data;?>">
 			</div>
@@ -50,12 +50,13 @@
 				<label>Realisasi Availability</label>
 				<input type="text" name="rele" class="form-control" value="<?=  $k->rele;?>">
 			</div>
-			<select name="id_tanggal" class="form-control">
+			<label>Bulan / Tahun</label>
+			<select name="id_tanggal" class="form-control mb-3">
 				<?php foreach ($tanggal as $tgl) { ?>
 					<option <?php if($tgl->id_tanggal == "$k->id_tanggal"){ echo 'selected="selected"'; } ?> value="<?php echo $tgl->id_tanggal ?>"><?php echo $tgl->dates?> </option>
 				<?php } ?>
 			</select>
-			<button type="submit" class="btn btn-primary btn-sm"> Simpan </button>
+			<button type="submit" class="btn btn-primary btn-sm mb-3"> Simpan </button>
 		</form>
 	<?php endforeach; ?>
 </div>
