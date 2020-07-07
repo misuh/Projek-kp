@@ -43,33 +43,31 @@ class home extends CI_Controller
         // exit();
     }
 
-    public function edit_profile($id){
+    public function edit_profile(){
         $data['title'] = 'Edit Profile';
-        $where = array('id' =>$id);
-        $data['data'] = $this->db->get_where('usr',$where)->result();
         $data['user'] = $this->db->get_where('usr',['email' => 
         $this->session->userdata('email')]) -> row_array();
+        $data['dt'] = $this->db->get('usr')->result_array();
         
-        $this->load->view('temp/header',$data);
-        $this->load->view('temp/side',$data);
-        $this->load->view('temp/top',$data);
-        $this->load->view('Menu/edit_profile',$data);
-        $this->load->view('temp/footer',$data);  
+        
+        if ($this->form_validation->run() ==  false){
+            $this->load->view('temp/header',$data);
+            $this->load->view('temp/side',$data);
+            $this->load->view('temp/top',$data);
+            $this->load->view('Menu/edit_profile',$data);
+            $this->load->view('temp/footer',$data);
+        }else{
+                $email      = $this->input->post('email');
+                $datas = array(
+                    'email' => $email
+                );
+                $where = array('id' => $id);
+                $this->db->where($where);
+                $this->db->update('usr',$datas);
+                redirect('home');
+            }
     }
 
-    public function update_profil(){
-        $id    = $this->input->post('id');
-        $name    = $this->input->post('name');
-        $email      = $this->input->post('email');
-        $data = array(
-            'name' => $name,
-            'email' => $email
-        );
-        $where = array('id' => $id);
-        $this->db->where($where);
-        $this->db->update('usr',$data);
-        redirect('home');
-    }   
 
     public function change_password(){
         $data['title'] = 'Edit Profile';
