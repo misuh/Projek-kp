@@ -84,9 +84,7 @@ class adm_home extends CI_Controller
         redirect('adm_home');
         }
 
-        public function edit_profila($id){
-        $where = array('id' =>$id);
-        $data['data'] = $this->db->get_where('usr',$where)->result();
+        public function edit_profila(){
         $data['title'] = 'Edit Profile';
         $this->load->view('temp/header',$data);
         $this->load->view('temp/adm_side',$data);

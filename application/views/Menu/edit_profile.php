@@ -1,23 +1,23 @@
 <div class="row">
-	<form>
-		<div class="container-fluid ml-3">
-		<h3>Edit Profile</h3>
 
+		<div class="container ml-3">
+		<h3>Profile</h3>
+	<?php echo validation_errors(); ?>
 	<?= $this->session->flashdata('message');?>
-		<form method="post" action="<?= base_url('home/edit_profile') ?>" class="col-2">
+		<form  action="<?= base_url('home/edit_profile') ?>" method="post" class="col-2">
 			<div class="form-group">
-				<input type="hidden" name="id" class="form-control" value="<?=  $dt->id;?>">
+				<input type="hidden" name="id" class="form-control" value="<?=  $user['id'];?>">
 			</div>
 			<div class="form-group">
-				<label>Nama</label>
-				<input type="text" name="name" class="form-control " value="<?=  $dt->name;?>" readonly>
+				<label for="nama">Nama</label>
+				<input type="text" name="name" id="name" class="form-control " value="<?=  $user['name'];?>" readonly>
 			</div>
 			<div class="form-group">
-				<label>Email</label>
-				<input type="text" name="email" class="form-control" value="<?=  $dt->email;?>">
+				<label for="email">Email</label>
+				<input type="email" name="email" id="email" class="form-control" value="<?=  $user['email'];?>" readonly>
 			</div>
-			<button type="submit" class="btn btn-primary btn-sm mb-3"> Simpan Perubahan </button>
+		
 		</form>
 </div>
-	</form>
+	
 </div>

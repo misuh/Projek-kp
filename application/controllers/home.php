@@ -47,8 +47,6 @@ class home extends CI_Controller
         $data['title'] = 'Edit Profile';
         $data['user'] = $this->db->get_where('usr',['email' => 
         $this->session->userdata('email')]) -> row_array();
-        $data['dt'] = $this->db->get('usr')->result_array();
-        
         
         if ($this->form_validation->run() ==  false){
             $this->load->view('temp/header',$data);
@@ -57,15 +55,17 @@ class home extends CI_Controller
             $this->load->view('Menu/edit_profile',$data);
             $this->load->view('temp/footer',$data);
         }else{
-                $email      = $this->input->post('email');
-                $datas = array(
-                    'email' => $email
-                );
-                $where = array('id' => $id);
-                $this->db->where($where);
-                $this->db->update('usr',$datas);
-                redirect('home');
+            $email      = $this->input->post('email');
+            $datas = array(
+                'email' => $email);
+            $where = array('id' => $id);
+            $this->db->where($where);
+            $this->db->update('usr',$datas);
+            $this->session->set_flashdata('message','<div class="alert alert-success" role="alert">Password salah</div>');
+            redirect('home');
             }
+            
+        
     }
 
 
