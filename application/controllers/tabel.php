@@ -1,5 +1,9 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
+    require('./application/third_party/phpoffice/vendor/autoload.php');
+
+        use PhpOffice\PhpSpreadsheet\Spreadsheet;
+        use PhpOffice\PhpSpreadsheet\Writer\Xls;
 
 class Tabel extends CI_Controller
 {
@@ -41,8 +45,9 @@ class Tabel extends CI_Controller
         $this->db->or_like('dur',$data['keyword']);
         $this->db->or_like('stan',$data['keyword']);
         $this->db->or_like('rele',$data['keyword']);
-        $this->db->or_like('id_tanggal',$data['filter_tabel']);
+        $this->db->like('dates',$data['filter_tabel']);
         $this->db->from('perfonmasi_jaringan');
+        $this->db->join('tanggal','perfonmasi_jaringan.id_tanggal = tanggal.id_tanggal');
 
         $config['total_rows']       = $this->db->count_all_results();
         $config['per_page']         = 10;
@@ -165,5 +170,116 @@ class Tabel extends CI_Controller
         $this->db->where($where);
         $this->db->delete('perfonmasi_jaringan');
         redirect('tabel');
+    }
+
+    public function excel(){
+
+        $this->load->model('tabel_model','tm');
+        $data['keyword'] = null;
+        $data['filter_tabel'] = null;
+        // Pencarian
+        if($this->input->post('submit')){
+            $data['keyword'] = $this->input->post('keyword');
+            $this->session->set_userdata('keyword',$data['keyword']);
+        }else{
+            $data['keyword'] = $this->session->userdata('keyword');
+        }
+
+        if($this->input->post('filter')){
+            $data['filter_tabel'] = $this->input->post('filter_tabel');
+            $this->session->set_userdata('filter_tabel',$data['filter_tabel']);
+        }else{
+            $data['filter_tabel'] = $this->session->userdata('filter_tabel');
+        }
+
+       
+        $this->db->like('u_pln',$data['keyword']);
+        $this->db->or_like('link',$data['keyword']);
+        $this->db->or_like('product',$data['keyword']);
+        $this->db->or_like('bandwith',$data['keyword']);
+        $this->db->or_like('service_id',$data['keyword']);
+        $this->db->or_like('asman',$data['keyword']);
+        $this->db->or_like('peru',$data['keyword']);
+        $this->db->or_like('jml',$data['keyword']);
+        $this->db->or_like('dur',$data['keyword']);
+        $this->db->or_like('stan',$data['keyword']);
+        $this->db->or_like('rele',$data['keyword']);
+        $this->db->like('dates',$data['filter_tabel']);
+        $this->db->from('perfonmasi_jaringan');
+        $this->db->join('tanggal','perfonmasi_jaringan.id_tanggal = tanggal.id_tanggal');
+
+        $config['total_rows']       = $this->db->count_all_results();
+       
+        $data['total_rows']         = $config['total_rows'];
+
+        $data['start'] = $this->uri->segment(3);
+        if ($data['keyword'] == null && $data['filter_tabel'] == null ) {
+                $data['isitabel'] = $this->tm->gettabel2($data['start']);} 
+        elseif ($data['keyword'] != null) {
+           {    
+            $data['isitabel'] = $this->tm->gettabel1($data['start'],$data['keyword']);}
+                if($data['filter_tabel'] != null){
+                    $data['isitabel'] = $this->tm->getfilter1($data['start'],$data['filter_tabel']);
+            }
+        }else{
+            $data['isitabel'] = $this->tm->getfilter1($data['start'],$data['filter_tabel']);
+            if ($data['keyword'] != null){
+                $data['isitabel'] = $this->tm->gettabel1($data['start'],$data['keyword']);}
+            } 
+
+
+        $spreadsheet = new Spreadsheet;
+
+        $spreadsheet->setActiveSheetIndex(0)
+                      ->setCellValue('A1', 'No')
+                      ->setCellValue('B1', 'Unit PLN')
+                      ->setCellValue('C1', 'Link')
+                      ->setCellValue('D1', 'Product')
+                      ->setCellValue('E1', 'Bandwith')
+                      ->setCellValue('F1', 'Service ID')
+                      ->setCellValue('G1', 'ASMAN')
+                      ->setCellValue('H1', 'Peruntukan')
+                      ->setCellValue('I1', 'Jumlah Gangguan')
+                      ->setCellValue('J1', 'Durasi Gangguan')
+                      ->setCellValue('K1', 'Standarisasi')
+                      ->setCellValue('L1', 'Relevansi');
+
+          $kolom = 2;
+          $nomor = 1;
+          foreach($data['isitabel'] as $pengguna) {
+
+               $spreadsheet->setActiveSheetIndex(0)
+                           ->setCellValue('A' . $kolom, $nomor)
+                           ->setCellValue('B' . $kolom, $pengguna['u_pln'])
+                           ->setCellValue('C' . $kolom, $pengguna['link'])
+                           ->setCellValue('D' . $kolom, $pengguna['product'])
+                           ->setCellValue('E' . $kolom, $pengguna['bandwith'])
+                           ->setCellValue('F' . $kolom, $pengguna['service_id'])
+                           ->setCellValue('G' . $kolom, $pengguna['asman'])
+                           ->setCellValue('H' . $kolom, $pengguna['peru'])
+                           ->setCellValue('I' . $kolom, $pengguna['jml'])
+                           ->setCellValue('J' . $kolom, $pengguna['dur'])
+                           ->setCellValue('K' . $kolom, $pengguna['stan'])
+                           ->setCellValue('L' . $kolom, $pengguna['rele']);
+
+               $kolom++;
+               $nomor++;
+
+          }
+
+
+    
+        $filename = $data['filter_tabel'];
+        $writer = new Xls($spreadsheet);
+
+      header('Content-Type: application/vnd.ms-excel');
+      header('Content-Disposition: attachment;filename="ss.xls"');
+      header('Cache-Control: max-age=0');
+
+      $writer->save('php://output');
+    }   
+
+    public function pdf(){
+
     }
 }

@@ -5,6 +5,9 @@ class tanggal_model extends CI_Model
 		public function tampilalldata(){
 			return $this->db->get('tanggal')->result_array();
 		}
+		public function tampilalldata1(){
+			return $this->db->get('tanggal')->result();
+		}
 		public function tampilbt()
 		{		
 		$this->db->select('*');

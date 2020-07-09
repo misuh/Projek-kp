@@ -51,6 +51,7 @@ body{
        <input class="btn btn-outline-success" type="submit" name="filter">
        </div>
        </form>
+      
 
       <form class="form-inline my-2 my-lg-0" action="<?=  base_url('tabel'); ?>" method="post" >
         <input class="form-control mr-sm-2" type="text" placeholder="Cari Data" name="keyword" autocomplete="off">
@@ -120,9 +121,22 @@ body{
 
 <!-- Pagination -->
 </div>
+
+ <!-- Example single danger button -->
+      
+
   <?= $this->pagination->create_links(); ?>
 
-
+  <div class="btn-group inline ml-4">
+          <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Export
+          </button>
+          <div class="dropdown-menu inline">
+            <a class="dropdown-item" href="<?= base_url('tabel/excel')  ?>">Excel</a>
+            <a class="dropdown-item" href="<?= base_url('tabel/excel')  ?>">PDF</a>
+  
+          </div>
+        </div>
 <a  class="btn guard" data-toggle="modal" data-target="#TambahData">
  <i class="fa fa-plus my-guard"></i>
  </a>
@@ -210,12 +224,5 @@ body{
   </div>
 </div>
 
-<script>
-  $("#datepicker").datepicker( {
-    format: "mm-yyyy",
-    startView: "months", 
-    minViewMode: "months"
-});
-</script>
 
 
