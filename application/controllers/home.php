@@ -45,26 +45,28 @@ class home extends CI_Controller
 
     public function edit_profile(){
         $data['title'] = 'Edit Profile';
-        $data['user'] = $this->db->get_where('usr',['email' => 
-        $this->session->userdata('email')]) -> row_array();
-        
-        if ($this->form_validation->run() ==  false){
+        $data['user'] = $this->db->get_where('usr',['name' => 
+        $this->session->userdata('name')]) -> row_array();
+        $data['data'] = $this->db->get_where('usr',$data['user'])->row();
+        $this->form_validation->set_rules('email','Email','trim|valid_email');
+        if ($this->form_validation->run() == false) {
             $this->load->view('temp/header',$data);
             $this->load->view('temp/side',$data);
             $this->load->view('temp/top',$data);
             $this->load->view('Menu/edit_profile',$data);
             $this->load->view('temp/footer',$data);
         }else{
+            $id         = $this->input->post('id');
             $email      = $this->input->post('email');
+            $name      = $this->input->post('name');
             $datas = array(
-                'email' => $email);
+                'email' => $email,
+                'name' => $name);
             $where = array('id' => $id);
-            $this->db->where($where);
+            $this->db->where($where,$this->session->userdata('id'));
             $this->db->update('usr',$datas);
-            $this->session->set_flashdata('message','<div class="alert alert-success" role="alert">Password salah</div>');
-            redirect('home');
-            }
-            
+            redirect('home/edit_profile');
+        }
         
     }
 

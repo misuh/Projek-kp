@@ -27,7 +27,6 @@ body{
 
 <div class="container-fluid">
   <?= validation_errors();  ?>
-  <?= form_error('menu','<div class="alert alert-danger" role="alert">','</div>'); ?>
   <?= $this->session->flashdata('message');  ?>
   <div class="mb-2">
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -47,13 +46,13 @@ body{
               <?php endforeach ?>
             </select>
       </ul>
-      <div class="col-md-9 mr-5">
+      <div class="col-9 mr-5">
        <input class="btn btn-outline-success" type="submit" name="filter">
        </div>
        </form>
       
 
-      <form class="form-inline my-2 my-lg-0" action="<?=  base_url('tabel'); ?>" method="post" >
+      <form class="form-inline my-2 my-lg-0 col-auto" action="<?=  base_url('tabel'); ?>" method="post" >
         <input class="form-control mr-sm-2" type="text" placeholder="Cari Data" name="keyword" autocomplete="off">
         <div class="input-group-append">
           <input class="btn btn-outline-success my-2 my-sm-0" type="submit" name="submit">
@@ -133,7 +132,6 @@ body{
           </button>
           <div class="dropdown-menu inline">
             <a class="dropdown-item" href="<?= base_url('tabel/excel')  ?>">Excel</a>
-            <a class="dropdown-item" href="<?= base_url('tabel/excel')  ?>">PDF</a>
   
           </div>
         </div>

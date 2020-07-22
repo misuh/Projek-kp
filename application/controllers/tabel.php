@@ -266,14 +266,22 @@ class Tabel extends CI_Controller
                $nomor++;
 
           }
+          
+          
+        if ($data['filter_tabel'] == null){
+            $filename = 'Laporan Kinerja.xls';
 
-
-    
-        $filename = $data['filter_tabel'];
+        }else{
+           $data['hasil'] = null;
+            $data['hasil']= $this->tanggal_model->tampils($data['filter_tabel']);
+            $filename = $data['hasil'].'.xls';
+        }
+        
+        
         $writer = new Xls($spreadsheet);
 
       header('Content-Type: application/vnd.ms-excel');
-      header('Content-Disposition: attachment;filename="ss.xls"');
+      header('Content-Disposition: attachment;filename="'.$filename.'"');
       header('Cache-Control: max-age=0');
 
       $writer->save('php://output');

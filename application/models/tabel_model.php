@@ -83,6 +83,9 @@
         }
 		return $this->db->get('perfonmasi_jaringan',$start)->result_array();
 	}
+
+    
+
 	// public function cari($tabel,$data,$keyword){
 
 	// 	if ($keyword) {

@@ -20,6 +20,15 @@ class tanggal_model extends CI_Model
 		return $query;
 		}
 
+		public function tampils($filter_tabel=null){
+
+				$this->db->select('dates');
+				$this->db->from('tanggal');
+				$this->db->where($filter_tabel);
+				$query = $this->db->get();
+			return $query->result();
+		}
+
 		// public function update(){
 		// 	return
 		// }
