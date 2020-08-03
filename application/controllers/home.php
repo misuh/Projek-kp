@@ -45,8 +45,8 @@ class home extends CI_Controller
 
     public function edit_profile(){
         $data['title'] = 'Edit Profile';
-        $data['user'] = $this->db->get_where('usr',['name' => 
-        $this->session->userdata('name')]) -> row_array();
+        $data['user'] = $this->db->get_where('usr',['email' => 
+        $this->session->userdata('email')]) -> row_array();
         $data['data'] = $this->db->get_where('usr',$data['user'])->row();
         $this->form_validation->set_rules('email','Email','trim|valid_email');
         if ($this->form_validation->run() == false) {
@@ -63,7 +63,7 @@ class home extends CI_Controller
                 'email' => $email,
                 'name' => $name);
             $where = array('id' => $id);
-            $this->db->where($where,$this->session->userdata('id'));
+            $this->db->where($where,$this->session->userdata('email'));
             $this->db->update('usr',$datas);
             redirect('home/edit_profile');
         }

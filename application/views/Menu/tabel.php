@@ -126,7 +126,7 @@ body{
 
   <?= $this->pagination->create_links(); ?>
 
-  <div class="btn-group inline ml-4">
+  <div class="btn-group inline ml-4 mb-3">
           <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Export
           </button>
